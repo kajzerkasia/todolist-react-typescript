@@ -11,3 +11,11 @@ export async function getTasks() {
 export async function createTask({text, isCompleted}) {
 	return instance.post('tasks', {text, isCompleted});
 }
+
+export async function updateTask(id, task) {
+	return instance.patch(`tasks/${id}`, task);
+}
+
+export async function deleteTask(id) {
+	return instance.delete(`tasks/${id}`);
+}

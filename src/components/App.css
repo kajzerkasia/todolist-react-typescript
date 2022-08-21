@@ -1,0 +1,52 @@
+.crossed {
+    position: relative;
+}
+
+.crossed::after {
+    content: ' ';
+    position: absolute;
+    top: 50%;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: green;
+    animation: strike 4s linear 1 forwards, disappear 5s linear 1 forwards;
+}
+
+.task {
+    position: relative;
+}
+
+.animation-element {
+    position: absolute;
+    display: none;
+    content: ' ';
+    top: 50%;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: green;
+}
+
+.animation-element.active {
+    display: block;
+    animation: strike 4s linear 1 forwards, disappear 5s linear 1 forwards;
+}
+
+@keyframes strike {
+    0% {
+        width: 0;
+    }
+    100% {
+        width: 100%;
+    }
+}
+
+@keyframes disappear {
+    0% {
+        opacity: 100%;
+    }
+    100% {
+        opacity: 0;
+    }
+}

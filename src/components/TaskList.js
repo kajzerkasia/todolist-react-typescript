@@ -8,7 +8,7 @@ const TaskList = props => {
 		<>
 			<div className='active'>
 				<Typography>Tasks TODO</Typography>
-				{props.tasks.map(task => <Task key={task.id} task={task} done={props.done} />)}
+				{props.tasks.map(task => <Task key={task.id} task={task} onTaskCompleted={props.onTaskCompleted} />)}
 			</div>
 			<hr />
 		</>

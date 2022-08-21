@@ -1,25 +1,27 @@
 import React, { useEffect, useState } from 'react';
 import AddTask from './AddTask';
 import TaskList from './TaskList';
-import {createTask, getTask, getTasks} from '../common/api/tasks';
+import {createTask, getTasks} from '../common/api/tasks';
 import './App.css';
 
 import { Container, Typography } from '@mui/material/';
 
-function App() {
+function App(id) {
 	const [tasks, setTasks] = useState([]);
 
-	const onNewTaskSubmit = async ({text, isCompleted}) => {
-		await createTask({text, isCompleted})
+	const loadTasks = () => {
 		getTasks().then(response => {
 			setTasks(response.data)
 		});
 	}
 
+	const onNewTaskSubmit = async ({text, isCompleted}) => {
+		await createTask({text, isCompleted})
+		loadTasks()
+	}
+
 	useEffect(() => {
-		getTasks().then(response => {
-			setTasks(response.data);
-		});
+		loadTasks();
 	}, []);
 
 	return (
@@ -27,7 +29,7 @@ function App() {
 			<div className='App'>
 				<Typography>TODO App</Typography>
 				<AddTask onNewTaskSubmit={onNewTaskSubmit} />
-				<TaskList tasks={tasks} />
+				<TaskList tasks={tasks.filter(task => !task.isCompleted)} onTaskCompleted={async () => loadTasks()} />
 			</div>
 		</Container>
 	);
