@@ -1,4 +1,4 @@
-import React, {useState, useEffect, useRef} from 'react';
+import React, {useState} from 'react';
 import {Checkbox} from '@mui/material';
 import {Typography} from '@mui/material/';
 import './App.css';
