@@ -1,20 +1,23 @@
-import React, {useState} from 'react';
+import React, {AnimationEventHandler, useState} from 'react';
 import {Checkbox} from '@mui/material';
 import {Typography} from '@mui/material/';
 import './App.css';
-import {updateTask} from "../common/api/tasks";
+import {ITask, updateTask} from "../common/api/tasks";
 
-const Task = props => {
-    const {text, id, isCompleted} = props.task;
+type TaskPropsT = ITask & {
+    onTaskCompleted: () => Promise<void>;
+}
+
+const Task = ({text, id, isCompleted, onTaskCompleted}: TaskPropsT) => {
     const [checked, setChecked] = useState(isCompleted);
     const [isAnimationActive, setIsAnimationActive] = useState(false);
 
-    const onAnimationEnd = async (event) => {
+    const onAnimationEnd: AnimationEventHandler<HTMLSpanElement> = async (event) => {
         if (event.animationName === 'disappear') {
             setIsAnimationActive(false);
             await updateTask(id, {isCompleted: !checked});
             setChecked(!checked);
-            await props.onTaskCompleted();
+            await onTaskCompleted();
         }
     };
 

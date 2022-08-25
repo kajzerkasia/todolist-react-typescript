@@ -1,12 +1,16 @@
 import React, { useState } from 'react';
 import { Button, TextField } from '@mui/material/';
 
+export type AddTaskPropsT = {
+	onNewTaskSubmit: (payload: {text: string, isCompleted: boolean}) => Promise<void>;
+}
+
 const AddTask = ({
 	onNewTaskSubmit
-				 }) => {
+				 }:AddTaskPropsT) => {
 	const [newTask, setNewTask] = useState('');
 
-	const inputHandler = event => {
+	const inputHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
 		setNewTask(event.target.value);
 	};
 
