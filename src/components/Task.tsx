@@ -28,7 +28,11 @@ const Task = ({text, id, isCompleted, onTaskCompleted}: TaskPropsT) => {
     return (
         <div className="task">
             <Typography>
-            <span aria-hidden="true" className={'animation-element' + (isAnimationActive ? ' active' : '')} onAnimationEnd={onAnimationEnd}></span>
+            <span aria-hidden="true" className={'animation-element' +
+                (isAnimationActive ?
+                    (!checked ? ' active' : ' inverted active')
+                    : (!checked ? '' : ' inverted'))}
+                  onAnimationEnd={onAnimationEnd}></span>
                 {text}
                 <Checkbox className='checkbox' onChange={toggleAnimationActive} checked={checked} />
             </Typography>

@@ -5,6 +5,7 @@ import {createTask, getTasks, ITask} from '../common/api/tasks';
 import './App.css';
 import {Container, Typography} from '@mui/material/';
 import {AddTaskPropsT} from "./AddTask";
+import CompletedTasks from "./CompletedTasks";
 
 type AppPropsT = {};
 
@@ -32,6 +33,7 @@ function App({}: AppPropsT): React.ReactElement {
                 <Typography>TODO App</Typography>
                 <AddTask onNewTaskSubmit={onNewTaskSubmit}/>
                 <TaskList tasks={((tasks).filter((task) => !task.isCompleted))} onTaskCompleted={async () => loadTasks()} />
+                <CompletedTasks tasks={((tasks).filter((task) => task.isCompleted))} onTaskCompleted={async () => loadTasks()} />
             </div>
         </Container>
     );

@@ -13,6 +13,14 @@
     background: green;
 }
 
+.animation-element.inverted {
+    display: block;
+}
+.animation-element.inverted.active {
+    animation: strike 4s linear 1 forwards reverse, disappear 5s linear 1;
+    display: block;
+}
+
 .animation-element.active {
     display: block;
     animation: strike 4s linear 1 forwards, disappear 5s linear 1 forwards;
